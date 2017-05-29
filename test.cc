@@ -11,7 +11,7 @@
  * by the two functions are same as expected output
  */
 template <typename F>
-bool dummyUnitTestFunction(map<string, bool> comparators, vector<string> inputs, string pattern, F f) {
+bool dummyUnitTestFunction(map<string, bool> comparators, vector<string> inputs, string pattern, F &f) {
     map<string, bool> elements;
     map<string, bool>::iterator it;
     for(int i = 0; i < inputs.size(); i++){
@@ -24,11 +24,13 @@ bool dummyUnitTestFunction(map<string, bool> comparators, vector<string> inputs,
     return true;
 }
 
-void checkOrFail(bool element) {
+string checkOrFail(bool element) {
 	if(element){
-		cout << "Passed" << endl;
+		return "Passed";
+		// cout << "Passed" << endl;
 	} else {
-		cout << "Failed" << endl;
+		return "Failed";
+		// cout << "Failed" << endl;
 	}
 }
 
@@ -40,11 +42,14 @@ int main(){
 	comp["Chris Hughes"] = true;
 	ele["Aalekh"] = true;
 	PhoneNumber phn;
+	bool res;
 
 	// This should pass the test
-	cout << "Test Passes: " << checkOrFail(dummyUnitTestFunction(comp, inp, "Chris", phn)) << endl;
+	res = dummyUnitTestFunction(comp, inp, "Chris", phn);
+	cout << "Test Passes: " << checkOrFail(res) << endl;
 
 	// This shouldn't pass the test
-	cout << "Test Passed: " << checkOrFail(dummyUnitTestFunction(comp, inp, "Byu", phn)) << endl;
+	res = dummyUnitTestFunction(comp, inp, "Byu", phn);
+	cout << "Test Passed: " << checkOrFail(res) << endl;
 	return 0;
 }
