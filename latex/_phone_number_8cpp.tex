@@ -1,0 +1,50 @@
+\hypertarget{_phone_number_8cpp}{}\section{Phone\+Number.\+cpp File Reference}
+\label{_phone_number_8cpp}\index{Phone\+Number.\+cpp@{Phone\+Number.\+cpp}}
+{\ttfamily \#include \char`\"{}phonenumber.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$string$>$}\newline
+Include dependency graph for Phone\+Number.\+cpp\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{_phone_number_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{main} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{_phone_number_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}\label{_phone_number_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}} 
+\index{Phone\+Number.\+cpp@{Phone\+Number.\+cpp}!main@{main}}
+\index{main@{main}!Phone\+Number.\+cpp@{Phone\+Number.\+cpp}}
+\subsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}
+122 \{ 
+123     \textcolor{keywordtype}{string} name;
+124     \hyperlink{class_phone_number}{PhoneNumber} phn;
+125 
+126     \textcolor{keywordflow}{while}(1)\{
+127         \textcolor{keywordtype}{int} selection;
+128         cout << \textcolor{stringliteral}{"1) Add contact 2) Search 3) Exit \(\backslash\)n"};
+129         cin >> selection;
+130         \textcolor{keywordflow}{if}(selection < 1) \{  cout << \textcolor{stringliteral}{"Incorrect option selected "}; \textcolor{keywordflow}{break};\}
+131         \textcolor{keywordflow}{if}(selection >= 3) \{cout << \textcolor{stringliteral}{"Happy Searching "}; \textcolor{keywordflow}{break};\}
+132         cout << \textcolor{stringliteral}{"Enter Name: "};
+133 
+134         \textcolor{comment}{// Since I used cin before getline, I had to use cin.ignore()}
+135 
+136         cin.ignore();
+137 
+138         \textcolor{comment}{// Used getline instead of cin, so as to accomodate whitespace that might be found}
+139         getline(cin, name);
+140         \textcolor{keywordflow}{if}(\hyperlink{utilities_8h_aeb1e5d0669ef92d40076bb567d06971a}{checkPermissibleEle}(name)) \{
+141             phn.\hyperlink{class_phone_number_a61de2e13f110953bad6af57895c860d2}{processing}(selection, name);
+142         \} \textcolor{keywordflow}{else} \{
+143             cout << \textcolor{stringliteral}{"You entered unpermitted character in you string\(\backslash\)n"};
+144         \}
+145     \}
+146  
+147     \textcolor{keywordflow}{return} 0;
+148 \}
+\end{DoxyCode}

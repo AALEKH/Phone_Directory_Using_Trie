@@ -1,0 +1,202 @@
+\hypertarget{class_phone_number}{}\section{Phone\+Number Class Reference}
+\label{class_phone_number}\index{Phone\+Number@{Phone\+Number}}
+
+
+{\ttfamily \#include $<$Phone\+Number.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_phone_number_a2a9b999ad972df12db343245c95bab1b}{insert} (string)
+\begin{DoxyCompactList}\small\item\em Simply to insert new word to trie. \end{DoxyCompactList}\item 
+void \hyperlink{class_phone_number_a8ccd9871c68caa6d5b5b8f915d7b2567}{contacts\+Utils} (Trie\+Node $\ast$cur\+Node, string, map$<$ string, bool $>$ \&check\+Map)
+\begin{DoxyCompactList}\small\item\em To iterate over all the elements of prefix. \end{DoxyCompactList}\item 
+map$<$ string, bool $>$ \hyperlink{class_phone_number_a0aefa75c9d4542be0ca256c798706732}{display} (string)
+\begin{DoxyCompactList}\small\item\em To return the map elements of trie for a given prefix. \end{DoxyCompactList}\item 
+void \hyperlink{class_phone_number_a4e8abfb7ecb3e046a3bbbb4e5bdd3f64}{display\+Content} (string)
+\begin{DoxyCompactList}\small\item\em To console log (or should I say cout) all the elements received from display elements. \end{DoxyCompactList}\item 
+void \hyperlink{class_phone_number_a61de2e13f110953bad6af57895c860d2}{processing} (int, string)
+\begin{DoxyCompactList}\small\item\em For barebone processing, just to check if the operation requested is search or insert or none of the two. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_phone_number_a8ccd9871c68caa6d5b5b8f915d7b2567}\label{class_phone_number_a8ccd9871c68caa6d5b5b8f915d7b2567}} 
+\index{Phone\+Number@{Phone\+Number}!contacts\+Utils@{contacts\+Utils}}
+\index{contacts\+Utils@{contacts\+Utils}!Phone\+Number@{Phone\+Number}}
+\subsubsection{\texorpdfstring{contacts\+Utils()}{contactsUtils()}}
+{\footnotesize\ttfamily void Phone\+Number\+::contacts\+Utils (\begin{DoxyParamCaption}\item[{Trie\+Node $\ast$}]{cur\+Node,  }\item[{string}]{prefix,  }\item[{map$<$ string, bool $>$ \&}]{check\+Map }\end{DoxyParamCaption})}
+
+
+
+To iterate over all the elements of prefix. 
+
+
+\begin{DoxyCode}
+43                                                                                              \{
+44     map<string, bool>::iterator it;
+45     \textcolor{keywordflow}{if} (curNode->last)\{
+46         \textcolor{comment}{// if(curNode) && }
+47         \textcolor{keywordflow}{if}(curNode->doesExist) checkMap[prefix] = \textcolor{keyword}{true};
+48         \textcolor{keywordflow}{for} (it=curNode->relevantList.begin(); it!=curNode->relevantList.end(); ++it)
+49             checkMap[it->first] = \textcolor{keyword}{true};
+50     \}
+51  
+52     \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} i: \hyperlink{utilities_8h_ab4cb01cee97b1625dadb96088dc7aad0}{p\_elements}) \{
+53         TrieNode *nextNode = curNode->child[i];
+54         \textcolor{keywordflow}{if} (nextNode != NULL)
+55             \hyperlink{class_phone_number_a8ccd9871c68caa6d5b5b8f915d7b2567}{contactsUtils}(nextNode, prefix + (\textcolor{keywordtype}{char})i, checkMap);        
+56     \}
+57 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{class_phone_number_a0aefa75c9d4542be0ca256c798706732}\label{class_phone_number_a0aefa75c9d4542be0ca256c798706732}} 
+\index{Phone\+Number@{Phone\+Number}!display@{display}}
+\index{display@{display}!Phone\+Number@{Phone\+Number}}
+\subsubsection{\texorpdfstring{display()}{display()}}
+{\footnotesize\ttfamily map$<$ string, bool $>$ Phone\+Number\+::display (\begin{DoxyParamCaption}\item[{string}]{str }\end{DoxyParamCaption})}
+
+
+
+To return the map elements of trie for a given prefix. 
+
+
+\begin{DoxyCode}
+59                                                  \{
+60     TrieNode *prevNode = root;
+61     map<string, bool> contactMap;
+62     \textcolor{keywordtype}{string} prefix = \textcolor{stringliteral}{""};
+63     \textcolor{keywordtype}{int} len = str.length();
+64  
+65     \textcolor{keywordtype}{int} i;
+66     \textcolor{keywordflow}{for} (i=0; i<len; i++)
+67     \{
+68         prefix += (char)str[i];
+69  
+70         \textcolor{keywordtype}{char} lastChar = prefix[i];
+71  
+72         TrieNode *curNode = prevNode->child[lastChar];
+73         \textcolor{keywordflow}{if} (curNode == NULL) \{
+74             cout << \textcolor{stringliteral}{"No Results Found for '"} << prefix << \textcolor{stringliteral}{"'\(\backslash\)n"};
+75             i++;
+76             \textcolor{keywordflow}{break};
+77         \}
+78 
+79         contactMap.clear();
+80         \hyperlink{class_phone_number_a8ccd9871c68caa6d5b5b8f915d7b2567}{contactsUtils}(curNode, prefix, contactMap);
+81  
+82         prevNode = curNode;
+83     \}
+84     \textcolor{comment}{// cout << 'Contact Map here !!!';}
+85     \textcolor{keywordflow}{return} contactMap;
+86 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{class_phone_number_a4e8abfb7ecb3e046a3bbbb4e5bdd3f64}\label{class_phone_number_a4e8abfb7ecb3e046a3bbbb4e5bdd3f64}} 
+\index{Phone\+Number@{Phone\+Number}!display\+Content@{display\+Content}}
+\index{display\+Content@{display\+Content}!Phone\+Number@{Phone\+Number}}
+\subsubsection{\texorpdfstring{display\+Content()}{displayContent()}}
+{\footnotesize\ttfamily void Phone\+Number\+::display\+Content (\begin{DoxyParamCaption}\item[{string}]{str }\end{DoxyParamCaption})}
+
+
+
+To console log (or should I say cout) all the elements received from display elements. 
+
+
+\begin{DoxyCode}
+88                                           \{
+89     map<string, bool>::iterator it;
+90     map<string, bool> mapper = \hyperlink{class_phone_number_a0aefa75c9d4542be0ca256c798706732}{display}(str);
+91 
+92     \textcolor{comment}{// cout << mapper.size() << endl;}
+93 
+94     \textcolor{keywordflow}{if}(mapper.size() != 0)\{
+95 
+96         \textcolor{comment}{// Below if condition is used to check if the exact match condition can be found.}
+97         \textcolor{keywordflow}{if} (mapper.count(str)>0)\{
+98             cout << str << \textcolor{stringliteral}{"\(\backslash\)n"};
+99             it=mapper.find(str);
+100             mapper.erase(it);
+101         \}
+102         \textcolor{keywordflow}{for} (it=mapper.begin(); it!=mapper.end(); ++it)
+103             cout << it->first << \textcolor{stringliteral}{" "} << \textcolor{stringliteral}{"\(\backslash\)n"};
+104     \}
+105 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{class_phone_number_a2a9b999ad972df12db343245c95bab1b}\label{class_phone_number_a2a9b999ad972df12db343245c95bab1b}} 
+\index{Phone\+Number@{Phone\+Number}!insert@{insert}}
+\index{insert@{insert}!Phone\+Number@{Phone\+Number}}
+\subsubsection{\texorpdfstring{insert()}{insert()}}
+{\footnotesize\ttfamily void Phone\+Number\+::insert (\begin{DoxyParamCaption}\item[{string}]{s }\end{DoxyParamCaption})}
+
+
+
+Simply to insert new word to trie. 
+
+
+\begin{DoxyCode}
+7 \{
+8 
+9     vector<string> v;
+10 
+11     \hyperlink{utilities_8h_a80afb9a0ecee7cfa669f93e60d398559}{split}(s, v, \textcolor{charliteral}{' '});
+12 
+13     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} j = 0;  j < v.size(); j++)\{
+14         \textcolor{keywordtype}{int} len = v[j].length();
+15  
+16         TrieNode *itr = root;
+17         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < len; i++)
+18         \{
+19 
+20             TrieNode *nextNode = itr->child[v[j][i]];
+21             \textcolor{keywordflow}{if} (nextNode == NULL)
+22             \{
+23                 nextNode = \textcolor{keyword}{new} TrieNode();
+24      
+25                 itr->child[v[j][i]] = nextNode;
+26             \}
+27      
+28             itr = nextNode;
+29 
+30             \textcolor{keywordflow}{if}(i == len-2) \{
+31                 \textcolor{keywordflow}{if}(j ==0) itr->doesExist = \textcolor{keyword}{true};
+32             \}
+33 
+34             \textcolor{keywordflow}{if} (i == len - 1)\{
+35                 itr->last = \textcolor{keyword}{true};
+36                 itr->relevantList[s] = \textcolor{keyword}{true};
+37             \}
+38         \}
+39     \}
+40 
+41 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{class_phone_number_a61de2e13f110953bad6af57895c860d2}\label{class_phone_number_a61de2e13f110953bad6af57895c860d2}} 
+\index{Phone\+Number@{Phone\+Number}!processing@{processing}}
+\index{processing@{processing}!Phone\+Number@{Phone\+Number}}
+\subsubsection{\texorpdfstring{processing()}{processing()}}
+{\footnotesize\ttfamily void Phone\+Number\+::processing (\begin{DoxyParamCaption}\item[{int}]{selection,  }\item[{string}]{name }\end{DoxyParamCaption})}
+
+
+
+For barebone processing, just to check if the operation requested is search or insert or none of the two. 
+
+
+\begin{DoxyCode}
+107                                                        \{
+108     \textcolor{keywordflow}{switch}(selection) \{
+109         \textcolor{keywordflow}{case} 1: 
+110                 \hyperlink{class_phone_number_a2a9b999ad972df12db343245c95bab1b}{insert}(name);
+111                 \textcolor{keywordflow}{break};
+112         \textcolor{keywordflow}{case} 2:
+113                 \hyperlink{class_phone_number_a4e8abfb7ecb3e046a3bbbb4e5bdd3f64}{displayContent}(name);
+114                 \textcolor{keywordflow}{break};
+115         \textcolor{keywordflow}{default}:
+116                 cout << \textcolor{stringliteral}{" \(\backslash\)n Wrong details Selected"} << endl;
+117                 \textcolor{keywordflow}{break};
+118     \}
+119 \}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{_phone_number_8h}{Phone\+Number.\+h}\item 
+\hyperlink{_phone_number_8cpp}{Phone\+Number.\+cpp}\end{DoxyCompactItemize}

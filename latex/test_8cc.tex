@@ -1,0 +1,87 @@
+\hypertarget{test_8cc}{}\section{test.\+cc File Reference}
+\label{test_8cc}\index{test.\+cc@{test.\+cc}}
+{\ttfamily \#include \char`\"{}phonenumber.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$string$>$}\newline
+Include dependency graph for test.\+cc\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename F $>$ }\\bool \hyperlink{test_8cc_a3c25af7257987cf52cbaa9493f7e8497}{dummy\+Unit\+Test\+Function} (map$<$ string, bool $>$ comparators, vector$<$ string $>$ inputs, string pattern, F f)
+\begin{DoxyCompactList}\small\item\em This {\ttfamily dummy\+Unit\+Test\+Function} is used to perform basic unit testing over {\ttfamily display function} \end{DoxyCompactList}\item 
+void \hyperlink{test_8cc_afe5123fa03e62159ee8006d589fa5080}{check\+Or\+Fail} (bool element)
+\item 
+int \hyperlink{test_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}{main} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{test_8cc_afe5123fa03e62159ee8006d589fa5080}\label{test_8cc_afe5123fa03e62159ee8006d589fa5080}} 
+\index{test.\+cc@{test.\+cc}!check\+Or\+Fail@{check\+Or\+Fail}}
+\index{check\+Or\+Fail@{check\+Or\+Fail}!test.\+cc@{test.\+cc}}
+\subsubsection{\texorpdfstring{check\+Or\+Fail()}{checkOrFail()}}
+{\footnotesize\ttfamily void check\+Or\+Fail (\begin{DoxyParamCaption}\item[{bool}]{element }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}
+27                                \{
+28     \textcolor{keywordflow}{if}(element)\{
+29         cout << \textcolor{stringliteral}{"Passed"} << endl;
+30     \} \textcolor{keywordflow}{else} \{
+31         cout << \textcolor{stringliteral}{"Failed"} << endl;
+32     \}
+33 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{test_8cc_a3c25af7257987cf52cbaa9493f7e8497}\label{test_8cc_a3c25af7257987cf52cbaa9493f7e8497}} 
+\index{test.\+cc@{test.\+cc}!dummy\+Unit\+Test\+Function@{dummy\+Unit\+Test\+Function}}
+\index{dummy\+Unit\+Test\+Function@{dummy\+Unit\+Test\+Function}!test.\+cc@{test.\+cc}}
+\subsubsection{\texorpdfstring{dummy\+Unit\+Test\+Function()}{dummyUnitTestFunction()}}
+{\footnotesize\ttfamily template$<$typename F $>$ \\
+bool dummy\+Unit\+Test\+Function (\begin{DoxyParamCaption}\item[{map$<$ string, bool $>$}]{comparators,  }\item[{vector$<$ string $>$}]{inputs,  }\item[{string}]{pattern,  }\item[{F}]{f }\end{DoxyParamCaption})}
+
+
+
+This {\ttfamily dummy\+Unit\+Test\+Function} is used to perform basic unit testing over {\ttfamily display function} 
+
+Although, I initially started out with using {\ttfamily G\+Test}(Google Test) for unit testing but due to improper cross platform issue that might be faced on using external library (other for instance was {\ttfamily C\+Test}), I decided to create a dummy function in order to perform basic unit testing, below code simply utilizes the power of template and passes object parameter to the given function and thus run the insert and display function to evaluate if the output by the two functions are same as expected output 
+\begin{DoxyCode}
+14                                                                                                       \{
+15     map<string, bool> elements;
+16     map<string, bool>::iterator it;
+17     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i = 0; i < inputs.size(); i++)\{
+18         f.insert(inputs[i]);
+19     \}
+20     elements = f.display(pattern);
+21     \textcolor{comment}{// if(elements.size() != comparators.size()) return false;}
+22     \textcolor{keywordflow}{for} (it=comparators.begin(); it!=comparators.end(); ++it)
+23         \textcolor{keywordflow}{if}(!(elements.count(it->first) > 0)) \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+24     \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+25 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{test_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}\label{test_8cc_ae66f6b31b5ad750f1fe042a706a4e3d4}} 
+\index{test.\+cc@{test.\+cc}!main@{main}}
+\index{main@{main}!test.\+cc@{test.\+cc}}
+\subsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}
+35           \{
+36     map<string, bool> comp, ele;
+37     vector<string> inp \{\textcolor{stringliteral}{"Chris"}, \textcolor{stringliteral}{"Chris Hughes"}\};
+38     vector<string> wrng \{\textcolor{stringliteral}{"Hey"}\};
+39     comp[\textcolor{stringliteral}{"Chris"}] = \textcolor{keyword}{true};
+40     comp[\textcolor{stringliteral}{"Chris Hughes"}] = \textcolor{keyword}{true};
+41     ele[\textcolor{stringliteral}{"Aalekh"}] = \textcolor{keyword}{true};
+42     \hyperlink{class_phone_number}{PhoneNumber} phn;
+43 
+44     \textcolor{comment}{// This should pass the test}
+45     cout << \textcolor{stringliteral}{"Test Passes: "} << \hyperlink{test_8cc_afe5123fa03e62159ee8006d589fa5080}{checkOrFail}(\hyperlink{test_8cc_a3c25af7257987cf52cbaa9493f7e8497}{dummyUnitTestFunction}(comp, inp,
+       \textcolor{stringliteral}{"Chris"}, phn)) << endl;
+46 
+47     \textcolor{comment}{// This shouldn't pass the test}
+48     cout << \textcolor{stringliteral}{"Test Passed: "} << \hyperlink{test_8cc_afe5123fa03e62159ee8006d589fa5080}{checkOrFail}(\hyperlink{test_8cc_a3c25af7257987cf52cbaa9493f7e8497}{dummyUnitTestFunction}(comp, inp,
+       \textcolor{stringliteral}{"Byu"}, phn)) << endl;
+49     \textcolor{keywordflow}{return} 0;
+50 \}
+\end{DoxyCode}

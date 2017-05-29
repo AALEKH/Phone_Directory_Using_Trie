@@ -1,0 +1,63 @@
+\hypertarget{test_8cpp}{}\section{test.\+cpp File Reference}
+\label{test_8cpp}\index{test.\+cpp@{test.\+cpp}}
+{\ttfamily \#include \char`\"{}all\+\_\+includes.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}phonenumber.\+h\char`\"{}}\newline
+Include dependency graph for test.\+cpp\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename F $>$ }\\bool \hyperlink{test_8cpp_a3c25af7257987cf52cbaa9493f7e8497}{dummy\+Unit\+Test\+Function} (map$<$ string, bool $>$ comparators, vector$<$ string $>$ inputs, string pattern, F f)
+\item 
+int \hyperlink{test_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{main} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{test_8cpp_a3c25af7257987cf52cbaa9493f7e8497}\label{test_8cpp_a3c25af7257987cf52cbaa9493f7e8497}} 
+\index{test.\+cpp@{test.\+cpp}!dummy\+Unit\+Test\+Function@{dummy\+Unit\+Test\+Function}}
+\index{dummy\+Unit\+Test\+Function@{dummy\+Unit\+Test\+Function}!test.\+cpp@{test.\+cpp}}
+\subsubsection{\texorpdfstring{dummy\+Unit\+Test\+Function()}{dummyUnitTestFunction()}}
+{\footnotesize\ttfamily template$<$typename F $>$ \\
+bool dummy\+Unit\+Test\+Function (\begin{DoxyParamCaption}\item[{map$<$ string, bool $>$}]{comparators,  }\item[{vector$<$ string $>$}]{inputs,  }\item[{string}]{pattern,  }\item[{F}]{f }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}
+6                                                                                                       \{
+7     map<string, bool> elements;
+8     map<string, bool>::iterator it;
+9     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i = 0; i < inputs.size(); i++)\{
+10         f.insert(inputs[i]);
+11     \}
+12     elements = f.display(pattern);
+13     \textcolor{keywordflow}{if}(elements.size() != comparators.size()) \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+14     \textcolor{keywordflow}{for} (it=comparators.begin(); it!=comparators.end(); ++it)
+15         \textcolor{keywordflow}{if}(!(elements.count(it->first) > 0)) \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+16     \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+17 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{test_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}\label{test_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}} 
+\index{test.\+cpp@{test.\+cpp}!main@{main}}
+\index{main@{main}!test.\+cpp@{test.\+cpp}}
+\subsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+\begin{DoxyCode}
+19           \{
+20     map<string, bool> comp, ele;
+21     vector<string> inp \{\textcolor{stringliteral}{"Chris"}, \textcolor{stringliteral}{"Chris Hughes"}\};
+22     vector<string> wrng \{\textcolor{stringliteral}{"Hey"}\};
+23     comp[\textcolor{stringliteral}{"Chris"}] = \textcolor{keyword}{true};
+24     comp[\textcolor{stringliteral}{"Chris Hughes"}] = \textcolor{keyword}{true};
+25     ele[\textcolor{stringliteral}{"Aalekh"}] = \textcolor{keyword}{true};
+26     \hyperlink{class_phone_number}{PhoneNumber} phn;
+27 
+28     \textcolor{comment}{// This should pass the test}
+29     cout << \textcolor{stringliteral}{"Test Passes: "} << \hyperlink{test_8cpp_a3c25af7257987cf52cbaa9493f7e8497}{dummyUnitTestFunction}(comp, inp, \textcolor{stringliteral}{"Chris"}, phn) << endl;
+30 
+31     \textcolor{comment}{// This shouldn't pass the test}
+32     cout << \textcolor{stringliteral}{"Test Passed: "} << \hyperlink{test_8cpp_a3c25af7257987cf52cbaa9493f7e8497}{dummyUnitTestFunction}(comp, inp, \textcolor{stringliteral}{"Byu"}, phn) << endl;
+33     \textcolor{keywordflow}{return} 0;
+34 \}
+\end{DoxyCode}
